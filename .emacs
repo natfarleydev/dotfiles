@@ -1,6 +1,19 @@
 (global-set-key (kbd "C-<return>") 'save-buffer)
-(set-face-attribute 'default nil :height 100)
+(set-face-attribute 'default nil :height 80)
 
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+
+(unless (require 'el-get nil 'noerror)
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
+    (goto-char (point-max))
+    (eval-print-last-sexp)))
+
+(el-get 'sync)
+
+(tool-bar-mode -1)
+(menu-bar-mode -1)
 
 ;; Org mode stuff
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
@@ -33,7 +46,8 @@
 ;;        (t (setq unread-command-events (append unread-command-events
 ;;                           (list evt))))))))
 
-;; (load-theme 'wombat)
+(load-theme 'wheatgrass)
+
 
 ;; from 
 
@@ -132,6 +146,7 @@ See also the documentation of the variable `tags-file-name'."
 ;; aend of stackoverflow thing
 
 
+
 (autoload 'octave-mode "octave-mod" nil t)
 (setq auto-mode-alist
       (cons '("\\.m$" . octave-mode) auto-mode-alist))
@@ -152,6 +167,8 @@ See also the documentation of the variable `tags-file-name'."
 (add-to-list 'ac-dictionary-directories "/home/nasfarley88/.emacs.d//ac-dict")
 (ac-config-default)
 
+
+(require 'pomodoro)
 (require 'ac-math)
 
 (require 'rainbow-delimiters)
@@ -216,6 +233,16 @@ See also the documentation of the variable `tags-file-name'."
 
 (setq load-path (append (list (expand-file-name "~/site-lisp")) load-path))
 
+
+;; mobileorgstuffs
+;; Set to the location of your Org files on your local system
+(setq org-directory "~/Dropbox/org")
+;; Set to the name of the file where new notes will be stored
+(setq org-mobile-inbox-for-pull "~/Dropbox/org/flagged.org")
+;; Set to <your Dropbox root directory>/MobileOrg.
+(setq org-mobile-directory "~/Dropbox/mobileOrg")
+
+
 ;; (global-auto-revert-mode t)
 
 (custom-set-variables
@@ -230,7 +257,7 @@ See also the documentation of the variable `tags-file-name'."
  '(custom-enabled-themes (quote (wheatgrass)))
  '(fill-column 80)
  '(flyspell-issue-message-flag nil)
- '(org-agenda-files (quote ("~/Dropbox/Unishare/Nathanael/project/report/report.org")))
+ '(org-agenda-files (quote ("~/Dropbox/org/shoppingList.org" "~/Dropbox/org/test.org")))
  '(reftex-cite-format (quote natbib)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
